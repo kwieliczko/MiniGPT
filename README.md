@@ -2,7 +2,7 @@
 
 An educational GPT-style language model trained from scratch on Polish literature.
 
-**Version 0.1.0 — experimental, pre-training release.** No trained weights or
+**Version 0.2.0 — experimental, resumable training release.** No trained weights or
 measured full-corpus results are included. Companion blog: https://www.thinkingaboutdata.com/
 
 ## Architecture
@@ -39,12 +39,27 @@ Alternatively, launch `jupyter lab` from the repository root and open `MiniGPT.i
 Training splits token IDs into contiguous 90% training and 10% validation sections
 before constructing non-overlapping 64-token windows with shifted targets.
 AdamW uses learning rate 0.0003 by default. Training loss is averaged during each
-epoch; validation loss is calculated at epoch end. The final checkpoint contains
-model and optimizer states and loss histories, not an exact-resume RNG snapshot.
+epoch; validation loss is calculated at epoch end. Each completed epoch saves model and optimizer states, RNG states, loss histories,
+epoch durations and generated samples. Resume requires the same corpus, batch size,
+learning rate and model configuration. Cross-device reproducibility is not guaranteed.
 Generation uses greedy decoding and a rolling context window; repetition is possible.
 A single novel is insufficient for broad generalization. Runtime and quality depend
 on the hardware, corpus and training configuration. Seed 123 does not guarantee
 bitwise reproducibility across platforms.
+
+## Training across multiple days
+
+```sh
+python train.py --epochs 1
+python train.py --epochs 1 --resume
+```
+
+`epochs` means additional epochs. The notebook automatically resumes when the latest
+checkpoint exists. Wait for the checkpoint confirmation before shutting down. An
+interrupted epoch must be repeated. The latest checkpoint is `minigpt_checkpoint.pth`;
+`minigpt_best.pth` holds the lowest validation loss. Both are in `checkpoints/`.
+For a fresh experiment use a new `--output` directory. Version 0.1.0 checkpoints
+cannot be resumed by this version. Keep local backups of checkpoints.
 
 ## Attribution and license
 
