@@ -1,0 +1,20 @@
+MiniGPT — From Tokens to Language
+Educational project published by Thinking About Data.
+
+Acknowledgments and provenance
+This project is inspired by Sebastian Raschka, Build a Large Language Model
+(From Scratch), Manning, 2024, and its official code repository:
+https://github.com/rasbt/LLMs-from-scratch
+Upstream license: https://github.com/rasbt/LLMs-from-scratch/blob/main/LICENSE.txt
+
+MiniGPT is a simplified implementation developed for a Polish educational
+blog series, with AI-assisted code preparation. It is not an official fork,
+product, or endorsed implementation of Sebastian Raschka or OpenAI.
+Differences include PyTorch's built-in MultiheadAttention and LayerNorm,
+a smaller configuration, a simplified dataset and training workflow,
+and training on Polish literature without pretrained GPT-2 weights.
+
+The upstream software license is Apache 2.0, with an explicit exclusion
+for books and related images. No book prose, illustrations, or pretrained
+weights are distributed here. Any upstream notices applicable to reused
+code must be retained. Third-party dependencies retain their own licenses.

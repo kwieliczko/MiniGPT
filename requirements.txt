@@ -1,0 +1,4 @@
+torch>=2.2
+tiktoken>=0.5
+matplotlib>=3.7
+jupyterlab>=4
